@@ -5,10 +5,12 @@ import android.arch.lifecycle.Observer
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Parcelable
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.ramza.kotlinsample.dialog.showNotesAlertDialog
 import com.ramza.kotlinsample.github.Result
 import com.ramza.kotlinsample.github.SearchRepositoryProvider
 import com.ramza.kotlinsample.util.await
@@ -24,6 +26,7 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.Appcompat
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.nield.kotlinstatistics.countBy
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +40,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var testButton : Button
 
     private var preferenceValue : Int by bindSharedPreference(this, "PerferenceKey", 0)
+
+    private var notesDialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        /*asyncAwait()
+        asyncAwait()
 
         greetAndHello()
 
@@ -180,7 +185,7 @@ class MainActivity : AppCompatActivity() {
                     draw()
                 }
             }
-        }*/
+        }
 
     }
 
@@ -346,6 +351,26 @@ class MainActivity : AppCompatActivity() {
         return {
             other(this(it))
         }
+    }
+
+    //  showing dialog
+    fun showDialog() {
+        if (notesDialog == null)
+        ////////////////////////////////////////////////////////////////
+        //  making Alert dialog - admire beauty of kotlin
+        ////////////////////////////////////////////////////////////////
+            notesDialog = showNotesAlertDialog {
+
+                cancelable = false
+
+                closeIconClickListener {
+                }
+
+                doneIconClickListener {
+                }
+            }
+        //  and showing
+        notesDialog?.show()
     }
 
 }
