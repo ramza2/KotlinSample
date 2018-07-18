@@ -1,6 +1,8 @@
 package com.ramza.kotlinsample.wiki
 
 import io.reactivex.Observable
+import kotlinx.coroutines.experimental.Deferred
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,6 +15,12 @@ interface WikiApiService{
                       @Query("format") format: String,
                       @Query("list") list: String,
                       @Query("srsearch") srsearch: String): Observable<Model.Result>
+
+    @GET("api.php")
+    fun hitCountCheck2(@Query("action") action: String,
+                      @Query("format") format: String,
+                      @Query("list") list: String,
+                      @Query("srsearch") srsearch: String): Deferred<Response<Model.Result>>
 
     companion object {
         fun create(): WikiApiService {

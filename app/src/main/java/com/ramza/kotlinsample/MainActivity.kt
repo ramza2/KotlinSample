@@ -15,13 +15,12 @@ import com.ramza.kotlinsample.github.Result
 import com.ramza.kotlinsample.github.SearchRepositoryProvider
 import com.ramza.kotlinsample.util.await
 import com.ramza.kotlinsample.util.bindSharedPreference
-import com.ramza.kotlinsample.util.load
-import com.ramza.kotlinsample.util.then
 import com.ramza.kotlinsample.wiki.WikiApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.parcel.Parcelize
+import kotlinx.coroutines.experimental.launch
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.Appcompat
 import org.jetbrains.anko.design.snackbar
@@ -81,11 +80,11 @@ class MainActivity : AppCompatActivity() {
                                 snackbar(testTextView, "This is a snack!")
                             }
                             negativeButton("Cancel") {
-                                load {
+                                /*load {
                                     searchNotSuspend()
                                 } then {
                                     testTextView.text = "There are ${it.items.size} Java developers in Korea"
-                                }
+                                }*/
                                 /*launch(Background){
                                     val result = search()
                                     launch(UI){
@@ -118,6 +117,20 @@ class MainActivity : AppCompatActivity() {
                                         }
                                     }
                                 }*/
+                                launch{
+                                    try{
+                                        val request = wikiApiServe.hitCountCheck2("query", "json", "search", "test")
+                                        val response = request.await()
+                                        if(response.isSuccessful){
+                                            val result = response.body()!!;
+                                            testTextView.text = "${result.query.searchinfo.totalhits} result found"
+                                        }else{
+
+                                        }
+                                    }catch (exception : Exception){
+
+                                    }
+                                }
                             }
                         }.show()
                     }
