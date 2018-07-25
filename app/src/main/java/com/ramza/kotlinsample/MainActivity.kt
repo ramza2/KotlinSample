@@ -44,20 +44,8 @@ class MainActivity : AppCompatActivity() {
 
     private var notesDialog: AlertDialog? = null
 
-    val fooLiveData: MutableLiveData<Boolean> = MutableLiveData()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        fooLiveData
-                .observe(this, Observer {
-            // foo is still nullable
-        })
-        fooLiveData
-                .nonNull()
-                .observe(this, Observer {
-            // Now foo is non-null
-        })
 
         UI(true) {
             verticalLayout {
