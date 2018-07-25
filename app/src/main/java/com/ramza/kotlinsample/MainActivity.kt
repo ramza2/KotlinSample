@@ -1,7 +1,6 @@
 package com.ramza.kotlinsample
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.os.AsyncTask
 import android.os.Bundle
@@ -16,7 +15,6 @@ import com.ramza.kotlinsample.github.Result
 import com.ramza.kotlinsample.github.SearchRepositoryProvider
 import com.ramza.kotlinsample.util.await
 import com.ramza.kotlinsample.util.bindSharedPreference
-import com.ramza.kotlinsample.util.nonNull
 import com.ramza.kotlinsample.wiki.WikiApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
